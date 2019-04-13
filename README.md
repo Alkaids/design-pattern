@@ -10,5 +10,5 @@
 
 
 
-- [Singleton 单例模式]()
+- [Singleton 单例模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/singleton.md)
 
