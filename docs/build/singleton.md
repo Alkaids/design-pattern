@@ -29,7 +29,7 @@
 对象实例，避免了线程安全问题，但如果单例类实例不被使用则会造成资源浪费。
 
 ``` java
-pulic class SingletonHungryWithConstant {
+public class SingletonHungryWithConstant {
 
     /**
      * 提供静态的不可修改的唯一实例常量
@@ -58,7 +58,7 @@ pulic class SingletonHungryWithConstant {
 容易造成资源浪费，无法实现懒加载。
 
 ``` java
-pulic class SingletonHungryWithStaticCode {
+public class SingletonHungryWithStaticCode {
 
     /**
      * 提供静态的唯一实例变量
@@ -83,7 +83,7 @@ pulic class SingletonHungryWithStaticCode {
      * @return
      */
     public static SingletonHungryWithStaticCode getInstance() {
-        return INSTANCE;
+        return instance;
     }
 }
 ```
@@ -247,7 +247,7 @@ public class SingletonInnerClass {
     /**
      * 静态内部类，保证线程安全，懒加载实现初始化实例
      */
-    private class SingletonInnerClassInstance {
+    private static class SingletonInnerClassInstance {
         private static final SingletonInnerClass INSTANCE = new SingletonInnerClass();
     }
 
@@ -272,7 +272,7 @@ public enum  SingletonEnum {
 
     //枚举单一实例，必须是单一的，不然没法保证单例
     INSTANCE;
-    
+
     //含有一个需要单例的类型的实例变量
     private Singleton instance;
 
@@ -285,7 +285,7 @@ public enum  SingletonEnum {
      * 提供静态的公共方法获取唯一实例 通过SingletonEnum.INSTANCE.getInstance() 获取单例类实例
      * @return
      */
-    public static Singleton getInstance() {
+    public Singleton getInstance() {
         return instance;
     }
 }
@@ -294,7 +294,7 @@ public enum  SingletonEnum {
  * 单例类-需要单例的类，不需要额外处理
  */
 class Singleton {
-    
+
 }
 ```
 

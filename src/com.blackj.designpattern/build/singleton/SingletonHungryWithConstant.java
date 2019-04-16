@@ -1,7 +1,7 @@
-package com.blackj.designpattern.build.sigleton;
+package com.blackj.designpattern.build.singleton;
 
 /**
- * Program Name: java-basic
+ * Program Name: design-pattern
  * <p>
  * Description: 单例模式饿汉式-常量式
  * <p>
@@ -10,7 +10,7 @@ package com.blackj.designpattern.build.sigleton;
  * @author Zhang.Haixin
  * @version 1.0
  */
-pulic class SingletonHungryWithConstant {
+public class SingletonHungryWithConstant {
 
     /**
      * 提供静态的不可修改的唯一实例常量

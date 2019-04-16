@@ -1,4 +1,4 @@
-package com.blackj.designpattern.build.sigleton;
+package com.blackj.designpattern.build.singleton;
 
 /**
  * Program Name: java-basic
@@ -27,7 +27,7 @@ public enum  SingletonEnum {
      * 提供静态的公共方法获取唯一实例 通过SingletonEnum.INSTANCE.getInstance() 获取单例类实例
      * @return
      */
-    public static Singleton getInstance() {
+    public Singleton getInstance() {
         return instance;
     }
 }

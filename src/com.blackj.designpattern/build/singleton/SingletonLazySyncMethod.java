@@ -1,7 +1,7 @@
-package com.blackj.designpattern.build.sigleton;
+package com.blackj.designpattern.build.singleton;
 
 /**
- * Program Name: java-basic
+ * Program Name: design-pattern
  * <p>
  * Description: 单例模懒汉式-同步方法
  * <p>

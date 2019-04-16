@@ -1,7 +1,7 @@
-package com.blackj.designpattern.build.sigleton;
+package com.blackj.designpattern.build.singleton;
 
 /**
- * Program Name: java-basic
+ * Program Name: design-pattern
  * <p>
  * Description: 单例模式饿汉式-静态代码块
  * <p>
@@ -10,7 +10,7 @@ package com.blackj.designpattern.build.sigleton;
  * @author Zhang.Haixin
  * @version 1.0
  */
-pulic class SingletonHungryWithStaticCode {
+public class SingletonHungryWithStaticCode {
 
     /**
      * 提供静态的唯一实例变量
@@ -35,6 +35,6 @@ pulic class SingletonHungryWithStaticCode {
      * @return
      */
     public static SingletonHungryWithStaticCode getInstance() {
-        return INSTANCE;
+        return instance;
     }
 }

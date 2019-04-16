@@ -1,7 +1,7 @@
-package com.blackj.designpattern.build.sigleton;
+package com.blackj.designpattern.build.singleton;
 
 /**
- * Program Name: java-basic
+ * Program Name: design-pattern
  * <p>
  * Description: 静态内部类实现单例
  * <p>
@@ -26,7 +26,7 @@ public class SingletonInnerClass {
     /**
      * 静态内部类，保证线程安全，懒加载实现初始化实例
      */
-    private class SingletonInnerClassInstance {
+    private static class SingletonInnerClassInstance {
         private static final SingletonInnerClass INSTANCE = new SingletonInnerClass();
     }
 
