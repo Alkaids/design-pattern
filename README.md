@@ -10,6 +10,8 @@
 
 - [Singleton 单例模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/singleton.md)
 
+- [Factory 工厂模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/factory.md)
+
 - [Builder 建造者模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/builder.md)
 
 - [Prototype 原型模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/prototype.md)
