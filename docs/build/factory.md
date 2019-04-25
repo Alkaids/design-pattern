@@ -32,7 +32,7 @@
 
 ![简单工厂UML图](../../static/simple-factory.png)
 
-从上面的图1可以看出，简单工厂主要有以下3中角色：
+从上面的图1可以看出，简单工厂主要有以下3种角色：
 
 1. 工厂(Factory)角色：用于创建具体产品，简单工厂模式的核心，封装类对产品的创建初始化逻辑，客户端直接调用使用。
 
@@ -206,5 +206,91 @@ productB.use();
 **注意：** 这种方式虽然符合类**开闭原则**，但是每次创建产品都需要传入具体的产品class，这样显得比较复杂繁琐，可以通过配置文件方式解决这个问题。
 
 ## 工厂方法（Factory Method）模式
+
+工厂方法模式是开发过程中使用工厂模式中最多的一种，很多优秀的框架都有使用，例如Spring 框架中就可以经常看到这种模式。
+
+工厂方法模式不再像简单工厂一样只提供一种工厂用来创建类似的类对象，而是针对每类对象都有自己的工厂用来创建管理对象，这样对对象的管理将
+更加细分化，也有利于类的扩展。
+
+### 角色分析
+
+![简单工厂UML图](../../static/abstract-factory.png)
+
+从上面的图2可以看出，工厂方法模式主要有以下4种角色：
+
+1. 抽象工厂(Abstract Factory)角色：用于规定工厂的生成产品方法，是工厂方法的核心，一般用抽象类或接口表示。
+
+2. 具体工厂(Concrete Factory)角色：具体产品的工厂类，继承或实现抽象工厂的工厂方法，用于创建管理具体的产品。
+
+3. 抽象产品(AbstractProduct)角色：和简单工厂一样，都是用于规定具体产品的创建过程。
+
+4. 具体产品(Concrete Product)角色： 和简单工厂一样，是具体客户端使用的产品对象，由具体工厂统一创建。
+
+### 抽象工厂(Abstract Factory)角色
+
+```java
+public interface AbstractFactory {
+
+    /**
+     * 定义获得产品的方法
+     * @return 返回产品
+     */
+    Product getProduct();
+}
+```
+
+### 具体工厂(Concrete Factory)角色
+```java
+public class ProductAFactory implements AbstractFactory{
+
+    /**
+     * 获取产品A
+     * @return 返回产品A
+     */
+    @Override
+    public Product getProduct() {
+        return new ProductA();
+    }
+}
+
+public class ProductBFactory implements AbstractFactory{
+
+    /**
+     * 获取产品B
+     * @return 返回产品B
+     */
+    @Override
+    public Product getProduct() {
+        return new ProductB();
+    }
+}
+```
+
+## 测试类
+
+由于抽象产品和具体产品的概念和简单工厂的一样，这里就不再继续展示代码，下面直接使用相同的产品进行测试，测试结果也是和之前的简单工厂一样，有兴趣的可以自行尝试，这里只展示下测试代码。
+
+```java
+public class FactoryTest {
+
+    public static void main(String[] args) {
+        //获取产品A并使用
+        AbstractFactory productAFactory = new ProductAFactory();
+        Product productA = productAFactory.getProduct();
+        productA.use();
+
+        //获取产品B并使用
+        AbstractFactory productBFactory = new ProductAFactory();
+        Product productB = productAFactory.getProduct();
+        productB.use();
+    }
+}
+```
+
+## 简单工厂对比工厂方法模式
+
+其实简单工厂模式可以看作工厂方法模式的一个特例，这样比较好理解，简单工厂是针对一类具有相同创建逻辑的产品进行统一管理的模式，所以只有一个工厂管理一类产品；工厂
+方法模式在简单工厂的基础上进行扩展，针对每一类产品都有自己的工厂类，可以做到多不同类创建的更细粒度化控制，这样也增加了系统的扩展性，符合"开闭原则"，增加新的
+产品只需要增加对应的产品工厂即可，但是并不是产品越多、产品工厂越多越好，个人认为越多就越会增加系统的复杂性，所以在具体使用过程中需要多方考虑。
 
 ## 抽象工厂（Abstract Factory）模式
