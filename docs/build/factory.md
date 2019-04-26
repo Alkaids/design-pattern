@@ -214,7 +214,7 @@ productB.use();
 
 ### 角色分析
 
-![简单工厂UML图](../../static/abstract-factory.png)
+![简单工厂UML图](../../static/factory-method.png)
 
 从上面的图2可以看出，工厂方法模式主要有以下4种角色：
 
@@ -294,3 +294,187 @@ public class FactoryTest {
 产品只需要增加对应的产品工厂即可，但是并不是产品越多、产品工厂越多越好，个人认为越多就越会增加系统的复杂性，所以在具体使用过程中需要多方考虑。
 
 ## 抽象工厂（Abstract Factory）模式
+
+抽象工厂模式是工厂模式中最不好理解的一种设计模式了，其实抽象工厂模式是工厂方法模式进一步深入思考实践后产生的一种设计模式，
+就我个人的理解，抽象工厂可以看作生产一组有关联依赖关系的产品的工厂模式，不管是简单工厂模式还是工厂方法模式都是强调的一个工厂
+只用来生产特定的一类产品，而抽象工厂模式下的工厂类是生产一组关联产品，何为关联产品？我这里举个栗子：我们平时使用的汽车，
+一般汽车是由发动机、底盘、车身和电器设备几个大件组成的，这里的发动机、底盘、车身和电器设备就是汽车厂的关联产品，如果我们
+只对单一产品通过工厂来创建这没问题，这样就会有发动机厂、底盘厂、车身厂和电器设备厂多个工厂类，而我们需要的产品是汽车并不是
+这些零件，所以我们就需要工厂来组装这些零件生产汽车--这就是抽象出来的汽车厂，抽象工厂就是用来组装特定关联的产品生成所需产品的模式。
+
+
+### 适用场景
+
+1. 和其他工厂类一样，客户端不关心具体的产品生成细节只关心所需的产品。
+
+2. 多个关联产品用于完成某种特定的需求或者生产某类所需的产品。
+
+3. 生产流程固定，不需要新增类来改变所需产品的创建。
+
+**注意：** 关于第三点很好理解，如果流程不固定，新增类就需要修改工厂的生产方法，不符合"开闭原则"。
+
+### 角色分析
+
+因为抽象工厂和工厂方法基本的思想是一致的，所以模式也分为四种角色：**抽象工厂(Abstract Factory)角色**、**具体工厂(Concrete Factory)角色**、**抽象产品(AbstractProduct)角色**、**具体产品(Concrete Product)角色**。
+
+这里就不再给出UML类图和重复概念了，有兴趣的可以查看前面的工厂方法模式的角色分析。
+
+### 示例
+
+下面我就以汽车的相关代码作为示例：
+
+#### 抽象产品汽车接口：
+
+```java
+public interface Car {
+
+    /**
+     * 汽车运动函数
+     */
+    void run();
+}
+```
+
+#### 抽象产品引擎接口
+
+```java
+public interface Engine {
+
+    /**
+     * 发动引擎函数
+     */
+    void start();
+}
+```
+ 
+#### 具体产品宝马车
+
+```java
+public class BMWCar implements Car {
+
+    @Override
+    public void run() {
+        System.out.println("宝马车时速在240km/h左右");
+    }
+}
+```
+
+#### 具体产品奔驰车
+
+```java
+public class BenzCar implements Car {
+
+    @Override
+    public void run() {
+        System.out.println("奔驰车时速在300km/h左右");
+    }
+}
+```
+
+#### 具体产品宝马引擎
+
+```java
+public class BMWEngine implements Engine {
+
+    @Override
+    public void start() {
+        System.out.println("宝马引擎发动声音---嗡-嗡-嗡");
+    }
+}
+```
+
+#### 具体产品奔驰引擎
+
+```java
+public class BenzEngine implements Engine {
+
+    @Override
+    public void start() {
+        System.out.println("奔驰车引擎发动声音---呜-呜-呜");
+    }
+}
+```
+
+#### 抽象工厂汽车厂
+
+```java
+public interface CarFactory {
+
+    /**
+     * 获取汽车
+     * @return 汽车
+     */
+    Car getCar();
+
+    /**
+     * 获取引擎
+     * @return 引擎
+     */
+    Engine getEngine();
+}
+```
+
+#### 具体工厂宝马厂
+
+```java
+public class BMWFactory implements CarFactory {
+
+    @Override
+    public Car getCar() {
+        return new BMWCar();
+    }
+
+    @Override
+    public Engine getEngine() {
+        return new BMWEngine();
+    }
+}
+```
+
+#### 具体工厂奔驰厂
+
+```java
+public class BenzFactory implements CarFactory {
+
+    @Override
+    public Car getCar() {
+        return new BenzCar();
+    }
+
+    @Override
+    public Engine getEngine() {
+        return new BenzEngine();
+    }
+}
+```
+
+#### 测试类
+
+```java
+public class CarTest {
+
+    public static void main(String[] args) {
+        //宝马车工厂获取宝马车相关产品
+        CarFactory bmwFactory = new BMWFactory();
+
+        Car bmwCar = bmwFactory.getCar();
+        Engine bmwEngine = bmwFactory.getEngine();
+
+        bmwEngine.start();
+        bmwCar.run();
+
+        //奔驰车工厂获取奔驰车相关产品
+        CarFactory benzFactory = new BenzFactory();
+
+        Car benzCar = benzFactory.getCar();
+        Engine benzEngine = benzFactory.getEngine();
+
+        benzEngine.start();
+        benzCar.run();
+    }
+}
+```
+
+#### 结果
+
+![抽象工厂模式示例结果](../../static/abstract-factory-result.png)
