@@ -1,6 +1,6 @@
-package com.blackj.designpattern.build.factory.abstractfactory;
+package com.blackj.designpattern.build.factory.factorymethod;
 
-import com.blackj.designpattern.build.factory.simple.Product;
+import com.blackj.designpattern.build.factory.simplefactory.Product;
 
 /**
  * Program Name: design-pattern

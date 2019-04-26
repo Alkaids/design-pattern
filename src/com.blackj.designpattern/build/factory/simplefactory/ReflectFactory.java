@@ -1,4 +1,4 @@
-package com.blackj.designpattern.build.factory.simple;
+package com.blackj.designpattern.build.factory.simplefactory;
 
 /**
  * Program Name: design-pattern

@@ -1,7 +1,7 @@
-package com.blackj.designpattern.build.factory.abstractfactory;
+package com.blackj.designpattern.build.factory.factorymethod;
 
-import com.blackj.designpattern.build.factory.simple.Product;
-import com.blackj.designpattern.build.factory.simple.ProductA;
+import com.blackj.designpattern.build.factory.simplefactory.Product;
+import com.blackj.designpattern.build.factory.simplefactory.ProductA;
 
 /**
  * Program Name: design-pattern
@@ -13,7 +13,7 @@ import com.blackj.designpattern.build.factory.simple.ProductA;
  * @author Zhang.Haixin
  * @version 1.0
  */
-public class ProductAFactory implements AbstractFactory{
+public class ProductAFactory implements AbstractFactory {
 
     /**
      * 获取产品A
