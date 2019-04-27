@@ -15,3 +15,18 @@
 - [Builder 建造者模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/builder.md)
 
 - [Prototype 原型模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/prototype.md)
+
+## 结构型模式
+
+- 类结构型模式
+    
+    + 外观模式
+    
+    + 代理模式
+    
+    + 策略模式
+
+
+- 对象结构型模式
+
+    + [Adapter 适配器模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/adapter.md)
