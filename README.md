@@ -4,7 +4,7 @@
 
 本项目纯属个人的学习经验总结，如果有不对的地方欢迎来提[Issues](<https://github.com/JordanHank/design-pattern/issues>)进行讨论。
 
-![设计模式思维导图](static/designPattern.png)
+![设计模式思维导图](static/design-pattern.png)
 
 ## 创建模式
 
