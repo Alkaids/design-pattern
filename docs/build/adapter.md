@@ -16,11 +16,11 @@
 
 + **对象适配器模式** 在这种适配器模式中，适配器容纳一个它包裹的类的实例。在这种情况下，适配器调用被包裹对象的物理实体。
 
-![对象适配起UML图](../../static/object-adaptor.png)
+![对象适配器UML图](../../static/object-adaptor.png)
 
 + **类适配器模式** 这种适配器模式下，适配器继承自已实现的类（一般多重继承）。
 
-![类适配起UML图](../../static/class-adaptor.png)
+![类适配器UML图](../../static/class-adaptor.png)
 
 由于C 、VB 、 Java 等编程语言都不支持多继承，所以这里主要介绍对象适配器模式。
 

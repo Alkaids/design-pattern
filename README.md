@@ -20,7 +20,7 @@
 
 - 类结构型模式
     
-    + 外观模式
+    + [Facade 外观模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/facade.md)
     
     + 代理模式
     
