@@ -22,7 +22,7 @@
     
     + [Facade 外观模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/facade.md)
     
-    + 代理模式
+    + [Proxy 代理模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/proxy.md)
     
     + 策略模式
 
