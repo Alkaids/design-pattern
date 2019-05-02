@@ -168,6 +168,146 @@ public static Object newProxyInstance(ClassLoader loader,
 
 #### InvocationHandler 接口
 
+InvocationHandler 是一个接口，官方文档解释说，每个代理的实例都有一个与之关联的 InvocationHandler 实现类，如果代理的方法被调用，那么代理便会通知和转发给内部的 InvocationHandler 实现类，由它决定处理。
 
+```java
+public interface InvocationHandler {
 
+    public Object invoke(Object proxy, Method method, Object[] args)
+        throws Throwable;
+}
+```
+
+#### invoke 方法
+
++ proxy: 代理对象。
+
++ method： 代理对象调用的方法。
+
++ args： 调用方法中传入的参数。
+
+Proxy 代理类最终会调用InvocationHandler 实现类的invoke 方法从而达到执行目标函数的目的。
+
+#### 代码示例
+
+```java
+
+```
+
+### CGLib 动态代理
+
+CGLib 动态代理,首先需要生成 Enhancer 类实例，并指定用于处理代理业务的回调类。在 Enhancer.create() 方法中，会使用 DefaultGeneratorStrategy.Generate() 方法生成动态代理类的字节码，并保存在 byte 数组中。接着使用 ReflectUtils.defineClass() 方法，通过反射，调用 ClassLoader.defineClass() 方法，将字节码装载到 ClassLoader 中，完成类的加载。最后使用 ReflectUtils.newInstance() 方法，通过反射，生成动态类的实例，并返回该实例。基本流程是根据指定的回调类生成 Class 字节码—通过 defineClass() 将字节码定义为类—使用反射机制生成该类的实例。
+
+> 关于**CGLib 动态代理**的说明引用于 [代理模式原理及实例讲解](https://www.ibm.com/developerworks/cn/java/j-lo-proxy-pattern/index.html) 博客中的讲解，有兴趣的可以查看原帖，关于代理模式讲的很具体，很细致，博主看后也是收获颇丰，在此也感谢原帖大佬的分享。
+
+#### Enhancer 类
+
+CGLib 代理的核心类，用于创建代理对象，允许为非接口类型创建一个Java代理。
+
+#### MethodInterceptor 接口
+ 
+用于指定处理代理业务的回调类的接口定义。
+
+```java
+public interface MethodInterceptor extends Callback {
+    Object intercept(Object var1, Method var2, Object[] var3, MethodProxy var4) throws Throwable;
+}
+```
++ var1: 被代理的对象。
+
++ var2: 被拦截的方法。
+
++ var3：被拦截的方法参数。
+
++ var4：代理方法。
+
+#### 代码示例
+
+代理接口：
+```java
+public interface CarProxy {
+
+    /**
+     * 卖车方法
+     */
+    void sellCar();
+}
+```
+
+代理类：
+```java
+public class CarProxyImpl {
+
+    /**
+     * 具体卖车的方法
+     */
+    public void sellCar() {
+        System.out.println("卖车的具体方法！");
+    }
+}
+```
+
+代理库：
+```java
+public class CarProxyLib implements MethodInterceptor {
+
+    /**
+     * 要代理的真实对象
+     */
+    private Object target;
+
+    /**
+     * 创建代理对象
+     *
+     * @param target 目标对象
+     * @return 代理对象
+     */
+    public Object getInstance(Object target) {
+        this.target = target;
+        Enhancer enhancer = new Enhancer();
+        //设置代理目标
+        enhancer.setSuperclass(this.target.getClass());
+        // 设置单一回调对象，在调用中拦截对目标方法的调用
+        enhancer.setCallback(this);
+        //设置类加载器
+        enhancer.setClassLoader(this.target.getClass().getClassLoader());
+        // 创建代理对象
+        return enhancer.create();
+    }
+
+    /**
+     * 拦截对目标方法的调用
+     * @param o 代理对象
+     * @param method 拦截的方法
+     * @param args 拦截的方法参数
+     * @param methodProxy 代理
+     * @return
+     * @throws Throwable
+     */
+    @Override
+    public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
+        System.out.println("代理开始");
+        methodProxy.invokeSuper(o, args);
+        System.out.println("代理结束");
+        return null;
+    }
+}
+```
+
+测试类：
+```java
+public class EnhancerTest {
+
+    public static void main(String[] args) {
+        //被代理的对象
+        CarProxyImpl proxy = new CarProxyImpl();
+        //代理增强库
+        CarProxyLib proxyLib = new CarProxyLib();
+        //代理对象
+        CarProxyImpl carProxyImpl = (CarProxyImpl) proxyLib.getInstance(proxy);
+        //执行目标函数
+        carProxyImpl.sellCar();
+    }
+}
+```
 
