@@ -190,9 +190,87 @@ Proxy 代理类最终会调用InvocationHandler 实现类的invoke 方法从而�
 
 #### 代码示例
 
+代理接口：
 ```java
+public interface SellCar {
 
+    /**
+     * 汽车贩卖方法
+     */
+    void sell();
+}
 ```
+
+代理类：
+```java
+public class BenzCar implements SellCar {
+
+    /**
+     * 卖奔驰车的方法
+     */
+    @Override
+    public void sell() {
+        System.out.println("卖奔驰车！！！");
+    }
+}
+```
+
+代理增强：
+```java
+public class BenzCarHandler implements InvocationHandler {
+
+    /**
+     * 定义最终方法调用接口
+     */
+    private SellCar sellCar;
+
+    public BenzCarHandler(SellCar sellCar) {
+        this.sellCar = sellCar;
+    }
+
+    /**
+     * 动态代理的消息传递
+     * @param proxy 代理类
+     * @param method 方法
+     * @param args 参数
+     * @return
+     * @throws Throwable
+     */
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        System.out.println("开始卖车：");
+        method.invoke(sellCar, args);
+        System.out.println("结束卖车！");
+        return null;
+    }
+
+}
+```
+
+测试类：
+```java
+public class JDKTest {
+
+    public static void main(String[] args) {
+
+        //被代理对象
+        SellCar benzCar = new BenzCar();
+
+        //代理处理回调
+        BenzCarHandler handler = new BenzCarHandler(benzCar);
+
+        //代理对象
+        SellCar proxy = (SellCar) Proxy.newProxyInstance(
+                ClassLoader.getSystemClassLoader(), new Class[]{SellCar.class}, handler);
+
+        //目标方法
+        proxy.sell();
+    }
+}
+```
+
+结果：
+![JDK 动态代理示例结果](../../static/proxy-jdk-result.png)
 
 ### CGLib 动态代理
 
@@ -310,4 +388,7 @@ public class EnhancerTest {
     }
 }
 ```
+
+结果：
+![CGLib代理示例结果](../../static/proxy-cglib-result.png)
 
