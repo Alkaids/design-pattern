@@ -23,10 +23,16 @@
     + [Facade 外观模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/facade.md)
     
     + [Proxy 代理模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/proxy.md)
-    
-    + 策略模式
 
 
 - 对象结构型模式
 
     + [Adapter 适配器模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/adapter.md)
+    
+## 行为型模式
+
+- 类行为模式
+
+- 对象行为模式
+
+    + [Strategy 策略模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/strategy.md)
