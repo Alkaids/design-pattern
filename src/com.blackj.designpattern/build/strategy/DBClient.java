@@ -13,18 +13,21 @@ package com.blackj.designpattern.build.strategy;
 public class DBClient {
 
     public static void main(String[] args) {
-
-        DBContext context = new DBContext();
-
         //加载mysql
-        context.getDB("mysql");
+        DBStrategy mysql = new MysqlStrategy();
+        DBContext mysqlContext = new DBContext(mysql);
+        mysqlContext.getDB();
         System.out.println();
 
         //加载sqlserver
-        context.getDB("sqlserver");
+        DBStrategy sqlserver = new SqlServerStrategy();
+        DBContext sqlserverContext = new DBContext(sqlserver);
+        sqlserverContext.getDB();
         System.out.println();
 
         //加载oracle
-        context.getDB("oracle");
+        DBStrategy oracle = new OracleStrategy();
+        DBContext oracleContext = new DBContext(oracle);
+        oracleContext.getDB();
     }
 }

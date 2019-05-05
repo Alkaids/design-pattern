@@ -18,25 +18,17 @@ public class DBContext {
     private DBStrategy strategy;
 
     /**
-     * 这里用常量某配置
+     * 构造函数传入具体策略
+     * @param strategy 具体策略
      */
-    private final String ORACLE = "oracle";
-    private final String SQLSERVER = "sqlserver";
-    private final String MYSQL = "mysql";
+    public DBContext(DBStrategy strategy) {
+        this.strategy = strategy;
+    }
 
     /**
      * 获取数据库方法
      */
-    public void getDB(String datebaseName) {
-        if(null == datebaseName || "".equals(datebaseName)) {
-            System.out.println("没有加载数据库");
-        } else if (SQLSERVER.equalsIgnoreCase(datebaseName)) {
-            strategy = new SqlServerStrategy();
-        } else if (ORACLE.equalsIgnoreCase(datebaseName)) {
-            strategy = new OracleStrategy();
-        } else if (MYSQL.equalsIgnoreCase(datebaseName)) {
-            strategy = new MysqlStrategy();
-        }
+    public void getDB() {
         strategy.loadDB();
     }
 }

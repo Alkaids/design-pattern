@@ -47,29 +47,20 @@ public class DBContext {
     private DBStrategy strategy;
 
     /**
-     * 这里用常量某配置
+     * 构造函数传入具体策略
+     * @param strategy 具体策略
      */
-    private final String ORACLE = "oracle";
-    private final String SQLSERVER = "sqlserver";
-    private final String MYSQL = "mysql";
+    public DBContext(DBStrategy strategy) {
+        this.strategy = strategy;
+    }
 
     /**
      * 获取数据库方法
      */
-    public void getDB(String datebaseName) {
-        if(null == datebaseName || "".equals(datebaseName)) {
-            System.out.println("没有加载数据库");
-        } else if (SQLSERVER.equalsIgnoreCase(datebaseName)) {
-            strategy = new SqlServerStrategy();
-        } else if (ORACLE.equalsIgnoreCase(datebaseName)) {
-            strategy = new OracleStrategy();
-        } else if (MYSQL.equalsIgnoreCase(datebaseName)) {
-            strategy = new MysqlStrategy();
-        }
+    public void getDB() {
         strategy.loadDB();
     }
 }
-
 ```
 
 ### Strategy 抽象策略类
@@ -127,19 +118,22 @@ public class OracleStrategy implements DBStrategy{
 public class DBClient {
 
     public static void main(String[] args) {
-
-        DBContext context = new DBContext();
-
         //加载mysql
-        context.getDB("mysql");
+        DBStrategy mysql = new MysqlStrategy();
+        DBContext mysqlContext = new DBContext(mysql);
+        mysqlContext.getDB();
         System.out.println();
 
         //加载sqlserver
-        context.getDB("sqlserver");
+        DBStrategy sqlserver = new SqlServerStrategy();
+        DBContext sqlserverContext = new DBContext(sqlserver);
+        sqlserverContext.getDB();
         System.out.println();
 
         //加载oracle
-        context.getDB("oracle");
+        DBStrategy oracle = new OracleStrategy();
+        DBContext oracleContext = new DBContext(oracle);
+        oracleContext.getDB();
     }
 }
 ```
