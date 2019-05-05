@@ -29,6 +29,8 @@
 
     + [Adapter 适配器模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/adapter.md)
     
+    + [Bridge 桥接模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/bridge.md)
+    
 ## 行为型模式
 
 - 类行为模式
