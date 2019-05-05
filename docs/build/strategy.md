@@ -39,6 +39,36 @@
 ### Context 环境类
 
 ```java
+public class DBContext {
+
+    /**
+     * 加载策略
+     */
+    private DBStrategy strategy;
+
+    /**
+     * 这里用常量某配置
+     */
+    private final String ORACLE = "oracle";
+    private final String SQLSERVER = "sqlserver";
+    private final String MYSQL = "mysql";
+
+    /**
+     * 获取数据库方法
+     */
+    public void getDB(String datebaseName) {
+        if(null == datebaseName || "".equals(datebaseName)) {
+            System.out.println("没有加载数据库");
+        } else if (SQLSERVER.equalsIgnoreCase(datebaseName)) {
+            strategy = new SqlServerStrategy();
+        } else if (ORACLE.equalsIgnoreCase(datebaseName)) {
+            strategy = new OracleStrategy();
+        } else if (MYSQL.equalsIgnoreCase(datebaseName)) {
+            strategy = new MysqlStrategy();
+        }
+        strategy.loadDB();
+    }
+}
 
 ```
 
@@ -91,12 +121,55 @@ public class OracleStrategy implements DBStrategy{
 }
 ```
 
+### 测试类
+
+```java
+public class DBClient {
+
+    public static void main(String[] args) {
+
+        DBContext context = new DBContext();
+
+        //加载mysql
+        context.getDB("mysql");
+        System.out.println();
+
+        //加载sqlserver
+        context.getDB("sqlserver");
+        System.out.println();
+
+        //加载oracle
+        context.getDB("oracle");
+    }
+}
+```
+
 ### 结果
 
 ![策略模式示例结果](../../static/strategy-result.png)
 
 ## 优点
 
++ 对单个策略进行抽离，根据环境变量进行转换，增加了可扩展性，降低了维护成本。
+
++ 提供了对"开闭原则"的天然支持，可以灵活的添加新的算法策略。
+
++ 避免了根据环境变量进行的多重判断，代码可读性更高，显得更可观。
+
++ 对算法进行统一抽离与管理。
+
 ## 缺点
 
++ 必须知道所有策略，并且根据需求调用需要的策略。
+
++ 将产生多种策略类，但实际使用的只有单个策略。
+
 ## 应用场景
+
+策略模式可以适用于下面这些场景或类似场景：
+
++ 某一种需求有多种算法可以完成，并且需要根据某种变化进行算法间的转换。
+
++ 不需要让客户端了解业务底层算法实现，只关注算法结果，将客户端和算法之间进行隔离。
+
++ 完成单一业务有多个算法，避免系统中的多重判断。
