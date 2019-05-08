@@ -31,6 +31,8 @@
     
     + [Bridge 桥接模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/bridge.md)
     
+    + [Composite 组合模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/composite.md)
+    
 ## 行为型模式
 
 - 类行为模式
