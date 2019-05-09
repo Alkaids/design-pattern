@@ -77,6 +77,15 @@ public class ChildOrg extends Organization{
      */
     private List<Organization> children = new ArrayList<Organization>();
 
+    /**
+     * 组织节点名称
+     */
+    private String orgName;
+
+    public ChildOrg(String orgName) {
+        this.orgName = orgName;
+    }
+
     @Override
     public void add(Organization org) {
         children.add(org);
@@ -89,23 +98,48 @@ public class ChildOrg extends Organization{
 
     @Override
     public void dispaly(int index) {
-        System.out.println("第" + index + "层组织机构");
+        System.out.println("第" + index + "层组织机构" + "---" + orgName);
         for (Organization org: children) {
             org.dispaly(index + 1);
         }
     }
 }
-
 ```
 
 ### 测试
 
 ```java
+public class CompositeTest {
 
+    public static void main(String[] args) {
+        String rootName = "根组织";
+        Organization root = new ChildOrg(rootName);
+
+        String firstOrgName = "一级组织";
+        Organization first = new ChildOrg(firstOrgName);
+
+        String secondOrgName = "二级组织";
+        Organization second = new ChildOrg(secondOrgName);
+
+        String nextOrgName = "一级同级组织";
+        Organization nextOrg = new ChildOrg(nextOrgName);
+
+        String nextSecondName = "二级同级组织";
+        Organization nextSecond = new ChildOrg(nextSecondName);
+
+        root.add(first);
+        first.add(second);
+        root.add(nextOrg);
+        nextOrg.add(nextSecond);
+
+        root.dispaly(1);
+    }
+}
 ```
 
 ### 结果
 
+![组合模式示例结果图](../../static/composite-result.png)
 ## 应用场景
 
 组合模式解耦了客户程序与复杂元素内部结构，从而使客户程序可以像处理简单元素一样来处理复杂元素。所以下面列举的这些场景比较适合使用组合模式。

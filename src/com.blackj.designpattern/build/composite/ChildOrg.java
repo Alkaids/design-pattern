@@ -20,6 +20,15 @@ public class ChildOrg extends Organization{
      */
     private List<Organization> children = new ArrayList<Organization>();
 
+    /**
+     * 组织节点名称
+     */
+    private String orgName;
+
+    public ChildOrg(String orgName) {
+        this.orgName = orgName;
+    }
+
     @Override
     public void add(Organization org) {
         children.add(org);
@@ -32,7 +41,7 @@ public class ChildOrg extends Organization{
 
     @Override
     public void dispaly(int index) {
-        System.out.println("第" + index + "层组织机构");
+        System.out.println("第" + index + "层组织机构" + "---" + orgName);
         for (Organization org: children) {
             org.dispaly(index + 1);
         }
