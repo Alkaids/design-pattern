@@ -25,18 +25,76 @@
 ### Component 抽象节点
 
 ```java
+public abstract class Organization {
 
+    /**
+     * 抽象添加方法
+     */
+    public abstract void add(Organization org);
+
+    /**
+     * 抽象删除方法
+     */
+    public abstract void remove(Organization org);
+
+    /**
+     * 抽象展示方法
+     */
+    public abstract void dispaly(int index);
+}
 ```
 
 ### Leaf 叶子节点
 
 ```java
+public class LeafOrg extends Organization {
+
+    @Override
+    public void add(Organization org) {
+        System.out.println("叶子组织节点没有添加实现");
+    }
+
+    @Override
+    public void remove(Organization org) {
+        System.out.println("叶子组织节点没有移除实现");
+    }
+
+    @Override
+    public void dispaly(int index) {
+        System.out.println("第" + index + "层组织机构");
+    }
+}
 
 ```
 
 ### Composite 树枝节点
 
 ```java
+public class ChildOrg extends Organization{
+
+    /**
+     * 子节点组织机构
+     */
+    private List<Organization> children = new ArrayList<Organization>();
+
+    @Override
+    public void add(Organization org) {
+        children.add(org);
+    }
+
+    @Override
+    public void remove(Organization org) {
+        children.remove(org);
+    }
+
+    @Override
+    public void dispaly(int index) {
+        System.out.println("第" + index + "层组织机构");
+        for (Organization org: children) {
+            org.dispaly(index + 1);
+        }
+    }
+}
 
 ```
 
