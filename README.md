@@ -8,11 +8,11 @@
 
 ## 创建模式
 
-- [Singleton 单例模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/singleton.md)
+- [Singleton Pattern单例模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/singleton.md)
 
-- [Factory 工厂模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/factory.md)
+- [Factory Pattern工厂模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/factory.md)
 
-- [Builder 建造者模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/builder.md)
+- [Builder Pattern建造者模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/builder.md)
 
 - [Prototype 原型模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/prototype.md)
 
@@ -20,18 +20,20 @@
 
 - 类结构型模式
     
-    + [Facade 外观模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/facade.md)
+    + [Facade Pattern外观模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/facade.md)
     
-    + [Proxy 代理模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/proxy.md)
+    + [Proxy Pattern代理模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/proxy.md)
 
 
 - 对象结构型模式
 
-    + [Adapter 适配器模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/adapter.md)
+    + [Adapter Pattern适配器模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/adapter.md)
     
-    + [Bridge 桥接模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/bridge.md)
+    + [Bridge Pattern桥接模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/bridge.md)
     
-    + [Composite 组合模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/composite.md)
+    + [Composite Pattern组合模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/composite.md)
+    
+    + [Flyweight Pattern享元模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/flyweight.md)
     
 ## 行为型模式
 
@@ -39,4 +41,4 @@
 
 - 对象行为模式
 
-    + [Strategy 策略模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/strategy.md)
+    + [Strategy Pattern策略模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/strategy.md)
