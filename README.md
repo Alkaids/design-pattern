@@ -35,6 +35,8 @@
     
     + [Flyweight Pattern享元模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/flyweight.md)
     
+    + [Decorator Pattern装饰模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/decorator.md)
+    
 ## 行为型模式
 
 - 类行为模式
