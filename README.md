@@ -42,7 +42,11 @@
 - 类行为模式
 
     + [Chain of Responsibility Pattern责任链模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/responsibilitychain.md)
+    
+ 
 
 - 对象行为模式
 
     + [Strategy Pattern策略模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/strategy.md)
+    
+    + [Command Pattern责任链模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/command.md)
