@@ -1,5 +1,6 @@
 # Command Pattern 命令模式
 
+在软件系统中，“行为请求者”与“行为实现者”通常呈现一种“紧耦合”。但在某些场合，比如要对行为进行“记录、撤销/重做、事务”等处理，这种无法抵御变化的紧耦合是不合适的。在这种情况下，如何将“行为请求者”与“行为实现者”解耦？将一组行为抽象为对象，实现二者之间的松耦合。这就是命令模式（Command Pattern）。 
 
 ## 定义
 
@@ -28,20 +29,33 @@
 ### Command 抽象命令
 
 ```java
-public interface Meal {
+public abstract class Meal {
+
+    /**
+     * 菜名
+     */
+    private String meal;
+
+    public void setMeal(String meal) {
+        this.meal = meal;
+    }
+
+    public String getMeal() {
+        return meal;
+    }
 
     /**
      * 点餐命令
      * @param meal
      */
-    void orderMeal(String meal);
+    public abstract void orderMeal(String meal);
 }
 ```
 
 ### ConcreteCommand 具体命令
 
 ```java
-public class ChineseMeal implements Meal {
+public class ChineseMeal extends Meal {
 
     /**
      * 大厨
@@ -54,6 +68,7 @@ public class ChineseMeal implements Meal {
 
     @Override
     public void orderMeal(String meal) {
+        System.out.println("客人点了" + meal);
         chef.cookMeal(meal);
     }
 }
@@ -61,8 +76,40 @@ public class ChineseMeal implements Meal {
 
 ### Invoker 调用者
 
+```java
+public class Waiter {
 
+    /**
+     * 点菜单
+     */
+    private List<Meal> orderdMeals = new ArrayList<Meal>();
 
+    /**
+     * 点菜
+     * @param meal
+     */
+    public void order(Meal meal) {
+        orderdMeals.add(meal);
+    }
+
+    /**
+     * 取消点菜
+     * @param meal
+     */
+    public void cancle(Meal meal) {
+        orderdMeals.remove(meal);
+    }
+
+    /**
+     * 下单
+     */
+    public void orderMeal() {
+        if (!orderdMeals.isEmpty()) {
+            orderdMeals.forEach(meal -> meal.orderMeal(meal.getMeal()));
+        }
+    }
+}
+```
 
 ### Receiver 接收者
 
@@ -84,3 +131,70 @@ public class ChineseChef implements Chef {
     }
 }
 ```
+
+### 测试
+
+```java
+public class CommandTest {
+
+    public static void main(String[] args) {
+        System.out.println("点菜==========");
+        Chef chineseChef = new ChineseChef();
+        Meal meal = new ChineseMeal(chineseChef);
+        meal.setMeal("红烧肉");
+        Waiter waiter = new Waiter();
+        waiter.order(meal);
+
+        Meal meal1 = new ChineseMeal(chineseChef);
+        meal1.setMeal("鱼香肉丝");
+        waiter.order(meal1);
+
+        Meal meal2 = new ChineseMeal(chineseChef);
+        meal2.setMeal("宫保鸡丁");
+        waiter.order(meal2);
+
+        Meal meal3 = new ChineseMeal(chineseChef);
+        meal3.setMeal("醋溜白菜");
+        waiter.order(meal3);
+        System.out.println("===醋溜白菜不要了====");
+        waiter.cancle(meal3);
+        waiter.orderMeal();
+    }
+}
+```
+
+### 结果
+
+![命令模式示例结果](../../static/command-result.png)
+
+## 应用场景
+
++ 系统需要支持撤销和恢复操作的应用场景。
+
++ 系统需要对请求进行组合操作的应用场景。
+
++ 系统膨胀需要对系统进行改造拆分解耦的应用场景。
+
++ 系统需要将请求的发起、等待、处理异步的进行的应用场景。
+
+## 优点
+
++ 将请求调用者和处理者进行否分，降低了系统耦合。
+
++ 增加了系统灵活性，新的命令可以很容易加到系统中。
+
++ 可以很容易对命令进行组合处理。
+
++ 可以很方便的进行日志记录。
+
++ 支持对请求的撤销和恢复，即对统一请求可以不同处理方式。
+
+## 缺点
+
+命令模式不适用于系统设计初期基于猜测进行的开发，因为这样会导致大量无用的命令类产生，更好的方式是在系统业务需要时，使用命令模式进行改造。
+
+命令模式的缺点有下面这些：
+
++ 系统命令的拆分可能导致大量命令类的产生。
+
++ 每种请求都要有一个具体的命令类来进行处理。

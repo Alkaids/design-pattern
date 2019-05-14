@@ -10,7 +10,7 @@ package com.blackj.designpattern.build.command;
  * @author Zhang.Haixin
  * @version 1.0
  */
-public class ChineseMeal implements Meal {
+public class ChineseMeal extends Meal {
 
     /**
      * 大厨
@@ -23,6 +23,7 @@ public class ChineseMeal implements Meal {
 
     @Override
     public void orderMeal(String meal) {
+        System.out.println("客人点了" + meal);
         chef.cookMeal(meal);
     }
 }

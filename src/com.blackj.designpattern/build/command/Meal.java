@@ -21,6 +21,10 @@ public abstract class Meal {
         this.meal = meal;
     }
 
+    public String getMeal() {
+        return meal;
+    }
+
     /**
      * 点餐命令
      * @param meal

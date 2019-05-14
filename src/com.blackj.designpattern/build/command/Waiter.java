@@ -41,7 +41,7 @@ public class Waiter {
      */
     public void orderMeal() {
         if (!orderdMeals.isEmpty()) {
-            orderdMeals.forEach(meal -> meal.orderMeal(meal.));
+            orderdMeals.forEach(meal -> meal.orderMeal(meal.getMeal()));
         }
     }
 }
