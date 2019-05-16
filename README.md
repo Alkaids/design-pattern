@@ -45,7 +45,7 @@
    
     + 模板方法模式
     
- 
+    + [Template Method Pattern模板方法模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/templatemethod.md)
 
 - 对象行为模式
 
