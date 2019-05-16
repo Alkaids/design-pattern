@@ -42,8 +42,6 @@
 - 类行为模式
 
     + [Chain of Responsibility Pattern责任链模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/responsibilitychain.md)
-   
-    + 模板方法模式
     
     + [Template Method Pattern模板方法模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/templatemethod.md)
 
