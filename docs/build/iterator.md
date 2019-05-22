@@ -9,6 +9,10 @@
 
 ## 角色分析
 
+![迭代器模式UML 类图](../../static/iterator.png)
+
+从图1的迭代器模式UML 类图可以看出迭代器模式有下面几种角色：
+
 + **Iterator 抽象迭代器：** 定义访问和遍历聚合对象内容元素的接口。
 
 + **ConcreteIterator 具体迭代器：** 实现了抽象迭代器的接口声明，提供具体的访问和遍历方法实现。
@@ -16,6 +20,60 @@
 + **Aggregate 抽象聚合类：** 定义创建相应迭代器对象的接口，用于生成对应的迭代器。
 
 + **ConcreteAggregate 具体聚合类：** 具体某类元素的聚合对象，继承了抽象聚合类，实现了对应的迭代器创建接口声明。
+
+## 示例
+
+Java 中的集合类都使用了迭代器模式，下面以自定义集合来演示迭代器模式的使用：
+
+###Iterator 抽象迭代器
+
+```java
+public interface MyIterator {
+
+    /**
+     * 是否有下一个
+     * @return
+     */
+    boolean hasNext();
+
+    /**
+     * 获取下一个
+     * @return
+     */
+    Object next();
+}
+```
+
+### ConcreteIterator 具体迭代器
+
+```java
+
+```
+
+### Aggregate 抽象聚合类
+
+```java
+public interface Container {
+
+    /**
+     * 获取迭代器方法
+     * @return
+     */
+    MyIterator createIterator();
+}
+```
+
+### ConcreteAggregate 具体聚合类
+
+```java
+
+```
+
+### 测试
+
+```java
+
+```
 
 ## 应用场景
 
