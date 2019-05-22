@@ -47,7 +47,42 @@ public interface MyIterator {
 ### ConcreteIterator 具体迭代器
 
 ```java
+public class SportIterator implements MyIterator {
 
+    /**
+     * 运动集合
+     */
+    private SportsContainer sports;
+
+    /**
+     * 查询下标
+     */
+    private int index;
+
+    /**
+     * 构造函数传入运动集合
+     * @param sports
+     */
+    public SportIterator(SportsContainer sports) {
+        this.sports = sports;
+    }
+
+    @Override
+    public boolean hasNext() {
+        if(index < sports.size()){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Object next() {
+        if(this.hasNext()){
+            return sports.getSport(index++);
+        }
+        return null;
+    }
+}
 ```
 
 ### Aggregate 抽象聚合类
@@ -66,14 +101,78 @@ public interface Container {
 ### ConcreteAggregate 具体聚合类
 
 ```java
+public class SportsContainer implements Container {
 
+    /**
+     * 运动集合
+     */
+    private List<String> sports = new ArrayList<>();
+
+    /**
+     * 添加运动项
+     * @param sport 运动项
+     */
+    public void addSport(String sport) {
+        sports.add(sport);
+    }
+
+    /**
+     * 删除运动项
+     * @param sport 运动项
+     */
+    public void removeSport(String sport) {
+        sports.remove(sport);
+    }
+
+    /**
+     * 获取指定下标的运动
+     * @param index 下标
+     * @return 运动项
+     */
+    public Object getSport(int index) {
+        return sports.get(index);
+    }
+
+    /**
+     * 运动数量
+     * @return 运动数量
+     */
+    public int size() {
+        return sports.size();
+    }
+
+    @Override
+    public MyIterator createIterator() {
+        return new SportIterator(this);
+    }
+}
 ```
 
 ### 测试
 
 ```java
+public class IteratorTest {
 
+    public static void main(String[] args) {
+        SportsContainer container = new SportsContainer();
+
+        container.addSport("basketball");
+        container.addSport("pingpong");
+        container.addSport("swimming");
+        container.addSport("baseball");
+
+        MyIterator iterator = container.createIterator();
+        System.out.println("遍历运动项：");
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next().toString());
+        }
+    }
+}
 ```
+
+### 结果
+
+![迭代器模式示例结果](../../static/iterator-result.png)
 
 ## 应用场景
 
