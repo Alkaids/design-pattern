@@ -54,3 +54,5 @@
     + [Command Pattern命令模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/command.md)
     
     + [Iterator Pattern迭代器模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/iterator.md)
+    
+    + [Mediator Pattern迭代器模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/mediator.md)
