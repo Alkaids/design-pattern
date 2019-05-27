@@ -26,6 +26,125 @@
 
 + 窄接口--只能将备忘录传递给其他对象而无法对内容进行访问操作：Caretaker使用。
 
+## 示例
+
+下面以读书为栗子演示备忘录模式的应用：
+
+### Originator 发起人
+
+```java
+public class Book {
+
+    //书名
+    private String name;
+
+    //当前页码
+    private int currentPage;
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    //插入书签
+    public Bookmark createBookmark() {
+        return new Bookmark(currentPage);
+    }
+
+    //取出书签阅读
+    public void readFromBookmark(Bookmark bookmark) {
+        this.currentPage = bookmark.getCurrentPage();
+    }
+}
+```
+
+### Memento 备忘录
+
+```java
+public class Bookmark {
+
+    //当前页码
+    private int currentPage;
+
+    public Bookmark(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    //读取当前页码
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    //保存当前页码
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+}
+```
+
+### Caretaker 管理者
+
+```java
+public class BookmarkCaretaker {
+
+    //书签
+    private Bookmark bookmark;
+
+    //设置书签
+    public void setBookmark(Bookmark bookmark) {
+        this.bookmark = bookmark;
+    }
+
+    //读取书签
+    public Bookmark getBookmark() {
+        return this.bookmark;
+    }
+}
+```
+
+### 测试
+
+```java
+public class MementoTest {
+
+    public static void main(String[] args) {
+
+        Book book = new Book();
+        book.setName("《设计模式》");
+        System.out.println("开始阅读：" + book.getName());
+        book.setCurrentPage(35);
+
+        BookmarkCaretaker bookmarkCaretaker = new BookmarkCaretaker();
+        System.out.println("今天就阅读到" + book.getCurrentPage() + "页");
+        bookmarkCaretaker.setBookmark(book.createBookmark());
+        System.out.print("合上书，");
+        book.setCurrentPage(0);
+        System.out.println("当前页码为：" + book.getCurrentPage() + "页");
+        System.out.println("------------------");
+
+        System.out.println("第二天继续阅读");
+        book.readFromBookmark(bookmarkCaretaker.getBookmark());
+        System.out.println("从第" + book.getCurrentPage() + "页开始阅读");
+    }
+}
+```
+
+### 结果
+
+![备忘录模式测试结果](../../static/memento-result.png)
+
 ## 应用场景
 
 + 适用于功能比较复杂但是需要记录或维护属性历史的类，或者对类的部分属性需要进行保存恢复的场景。
@@ -38,7 +157,6 @@
 
 + 对内部信息进行封装，使得用户在进行保存状态时无需关注细节。
 
-+ 
 
 ## 缺点
 
