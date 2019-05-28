@@ -58,3 +58,5 @@
     + [Mediator Pattern中介者模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/mediator.md)
     
     + [Memento Pattern备忘录模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/memento.md)
+    
+    + [Observer Pattern观察者模式模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/observer.md)
