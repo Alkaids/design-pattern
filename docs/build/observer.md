@@ -124,7 +124,7 @@ public class Programmer implements Reader {
     @Override
     public void read() {
         if (available) {
-            System.out.println(name + ":今天老板不再，可以偷懒看最新小说更新，真开心！");
+            System.out.println(name + ":今天老板不再，可以偷懒看小说更新，真开心！");
         } else {
             System.out.println(name + ":今天只顾着改bug了都没时间看小说更新。");
         }
@@ -135,8 +135,34 @@ public class Programmer implements Reader {
 ### 测试
 
 ```java
+public class ObserverTest {
 
+    public static void main(String[] args) {
+        ScienceFiction santi = new ScienceFiction("《三体》", 100);
+
+        Student zhang = new Student("张三");
+        zhang.setAvailable(true);
+        santi.addReader(zhang);
+        Programmer li = new Programmer("李四");
+        li.setAvailable(false);
+        santi.addReader(li);
+
+        santi.updateChapter();
+        santi.notifyReaders();
+
+        System.out.println("====又过了一天====");
+        Programmer wang = new Programmer("王五");
+        wang.setAvailable(true);
+        santi.addReader(wang);
+        santi.updateChapter();
+        santi.notifyReaders();
+    }
+}
 ```
+
+### 结果
+
+![观察者模式示例结果](../../static/observer-result.png)
 
 ## 应用场景
 

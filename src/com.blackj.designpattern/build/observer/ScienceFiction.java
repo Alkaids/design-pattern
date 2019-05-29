@@ -23,6 +23,6 @@ public class ScienceFiction extends Novel {
 
     public void updateChapter() {
         this.chapter += 2;
-        System.out.println(novelName + "今天小说更新2章！");
+        System.out.println(novelName + "今天小说更新2章！现在一共" + chapter + "章。");
     }
 }

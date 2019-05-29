@@ -27,7 +27,7 @@ public class Programmer implements Reader {
     @Override
     public void read() {
         if (available) {
-            System.out.println(name + ":今天老板不再，可以偷懒看最新小说更新，真开心！");
+            System.out.println(name + ":今天老板不再，可以偷懒看小说更新，真开心！");
         } else {
             System.out.println(name + ":今天只顾着改bug了都没时间看小说更新。");
         }
