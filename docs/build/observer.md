@@ -8,6 +8,10 @@
 
 ## 角色分析
 
+![观察者模式UML 类图](../../static/observer.png)
+
+从图1的观察者模式UML 类图中可以看出观察者模式有下面几种角色：
+
 + **Subject 抽象主题：** 含有对该主题进行关注的观察者集合引用，可以对观察者对象进行新增和删除，还有就是对观察者对象进行消息通知，简单来说就是对观察者的操作进行定义。
 
 + **ConcreteSubject 具体主题：** 具体某个主题，实现了抽象出题的接口定义，当主题内部状态发生改变时会通知观察者对象进行更新。
@@ -15,6 +19,124 @@
 + **Observer 抽象观察者：** 为所有的具体观察者定义一个统一的更新接口，用于主题发送消息时进行自我更新使用。
 
 + **ConcreteObserver 具体观察者：** 具体观察者是对具体主题的观察对象类型，实现了抽象观察者的更新接口定义，通常含有具体主题的引用用户获取具体主题的状态改变。
+
+## 示例
+
+下面以订阅小说为栗子演示观察者模式的应用：
+
+### Subject 抽象主题
+
+```java
+public abstract class Novel {
+
+    private List<Reader> readers = new ArrayList<>();
+
+    public void addReader(Reader reader) {
+        readers.add(reader);
+    }
+
+    public void removeReader(Reader reader) {
+        readers.remove(reader);
+    }
+
+    public void notifyReaders() {
+        for (Reader reader: readers) {
+            reader.read();
+        }
+    }
+}
+```
+
+### ConcreteSubject 具体主题
+
+```java
+public class ScienceFiction extends Novel {
+
+    private String novelName;
+
+    private int chapter;
+
+    public ScienceFiction(String novelName, int chapter) {
+        this.novelName = novelName;
+        this.chapter = chapter;
+    }
+
+    public void updateChapter() {
+        this.chapter += 2;
+        System.out.println(novelName + "今天小说更新2章！");
+    }
+}
+```
+
+### Observer 抽象观察者
+
+```java
+public interface Reader {
+
+    /**
+     * 阅读小说
+     */
+    void read();
+}
+```
+
+### ConcreteObserver 具体观察者
+
+```java
+public class Student implements Reader {
+
+    private boolean available;
+
+    private String name;
+
+    public Student(String name) {
+        this.name = name;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    @Override
+    public void read() {
+        if (available) {
+            System.out.println(name + ":我有时间可以看最新小说章节，真开心！");
+        } else {
+            System.out.println(name + ":今天太忙了小说更新了也没时间看。");
+        }
+    }
+}
+
+public class Programmer implements Reader {
+
+    private boolean available;
+
+    private String name;
+
+    public Programmer(String name) {
+        this.name = name;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    @Override
+    public void read() {
+        if (available) {
+            System.out.println(name + ":今天老板不再，可以偷懒看最新小说更新，真开心！");
+        } else {
+            System.out.println(name + ":今天只顾着改bug了都没时间看小说更新。");
+        }
+    }
+}
+```
+
+### 测试
+
+```java
+
+```
 
 ## 应用场景
 
