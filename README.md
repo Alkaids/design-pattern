@@ -59,4 +59,6 @@
     
     + [Memento Pattern备忘录模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/memento.md)
     
-    + [Observer Pattern观察者模式模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/observer.md)
+    + [Observer Pattern观察者模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/observer.md)
+    
+    + [State Pattern状态模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/state.md)
