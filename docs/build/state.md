@@ -18,6 +18,145 @@
 
 + **Context 环境类：** 需要根据某种状态发生变化的类。
 
+## 示例
+
+下面以不同天气的穿着为栗子演示状态模式的应用：
+
+### State 抽象状态类
+
+```java
+public abstract class WeatherDress {
+
+    private String weatherName;
+
+    public String getWeatherName() {
+        return weatherName;
+    }
+
+    public void setWeatherName(String weatherName) {
+        this.weatherName = weatherName;
+    }
+
+    public WeatherDress(String weatherName) {
+        this.weatherName = weatherName;
+    }
+    
+    public abstract void dressWear();
+}
+```
+ 
+### ConcreteState 具体状态类
+
+```java
+public class SunnyDress extends WeatherDress {
+    
+    public SunnyDress(String weatherName) {
+        super(weatherName);
+    }
+
+    @Override
+    public void dressWear() {
+        System.out.println("今天的天气是：" + this.getWeatherName());
+        System.out.println("穿短袖T恤出门就好。");
+    }
+}
+
+public class WindDress extends WeatherDress {
+
+    public WindDress(String weatherName) {
+        super(weatherName);
+    }
+
+    @Override
+    public void dressWear() {
+        System.out.println("今天的天气是：" + this.getWeatherName());
+        System.out.println("需要披一个外套出门。");
+    }
+}
+
+public class RainDress extends WeatherDress {
+
+    public RainDress(String weatherName) {
+        super(weatherName);
+    }
+
+    @Override
+    public void dressWear() {
+        System.out.println("今天的天气是：" + this.getWeatherName());
+        System.out.println("需要穿雨衣或者带伞出门。");
+    }
+}
+
+public class SnowDress extends WeatherDress {
+
+    public SnowDress(String weatherName) {
+        super(weatherName);
+    }
+
+    @Override
+    public void dressWear() {
+        System.out.println("今天的天气是：" + this.getWeatherName());
+        System.out.println("需要穿羽绒服或大衣出门。");
+    }
+}
+
+```
+
+### Context 环境类
+
+```java
+public class Person {
+
+    private String name;
+
+    private WeatherDress weatherDress;
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public WeatherDress getWeatherDress() {
+        return weatherDress;
+    }
+
+    public void setWeatherDress(WeatherDress weatherDress) {
+        this.weatherDress = weatherDress;
+    }
+
+    public void goOutKnowTheWeather() {
+        this.weatherDress.dressWear();
+    }
+}
+```
+
+### 测试
+
+```java
+public class StateTest {
+
+    public static void main(String[] args) {
+        Person person = new Person("张三");
+
+        person.setWeatherDress(new SnowDress("晴天"));
+        person.goOutKnowTheWeather();
+
+        System.out.println("=======another day=====");
+
+        person.setWeatherDress(new RainDress("下雨"));
+        person.goOutKnowTheWeather();
+
+        System.out.println("=======another day=====");
+        person.setWeatherDress(new WindDress("刮风"));
+        person.goOutKnowTheWeather();
+    }
+}
+
+```
+
+### 结果
+
+![状态模式示例结果](../../static/state-result.png)
+
 ## 作用
 
 状态模式主要是为类解决当控制一个类的状态表达式过于复杂的情况，将状态判断的逻辑转移到不同状态的一系列类中，可以把复杂的逻辑简单化，从而增加灵活性与可扩展性。
