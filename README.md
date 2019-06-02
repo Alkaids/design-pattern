@@ -62,3 +62,5 @@
     + [Observer Pattern观察者模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/observer.md)
     
     + [State Pattern状态模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/state.md)
+    
+    + [Interpreter Pattern解释器模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/interpreter.md)
