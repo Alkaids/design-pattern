@@ -6,6 +6,10 @@
 
 ![设计模式思维导图](static/design-pattern.png)
 
+## 设计原则
+
+- [Single Responsibility Principle单一职责原则](https://github.com/JordanHank/design-pattern/blob/master/docs/build/srp.md)
+
 ## 创建模式
 
 - [Singleton Pattern单例模式](https://github.com/JordanHank/design-pattern/blob/master/docs/build/singleton.md)
