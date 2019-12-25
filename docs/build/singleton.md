@@ -191,14 +191,15 @@ public class SingletonLazySyncCode {
 
 解决同步代码块造成的线程不安全问题，同时保证了单例类的唯一性，提高了判断效率，还实现了懒加载过程
 避免了资源的浪费。
+加入 volatile 关键字，禁止指令重排，防止在某个线程执行到第一次检测，读取到的instance不为null时，instance对象可能没有完成初始化的情况出现。
 
 ```java
 public class SingletonLazyDoubleCheck {
 
     /**
-     * 提供静态的唯一实例变量
+     * 提供volatile修饰的静态的唯一实例变量
      */
-    private static SingletonLazyDoubleCheck instance;
+    private static volatile SingletonLazyDoubleCheck instance;
 
     /**
      * 构造方法私有化，防止外部初始化创建实例
